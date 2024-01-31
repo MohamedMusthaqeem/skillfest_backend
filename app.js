@@ -13,6 +13,7 @@ mongoose
   });
 const comroutes = require("./Routes/competitionroutes");
 const everoutes =require("./Routes/eventroutes");
+const workroutes =require("./Routes/workshoproutes")
 // app instance
 const app = express();
 //cors middleware
@@ -25,7 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 //com routes
 app.use("/api/routes", comroutes);
 //events routes
-app.use("/api/events",everoutes)
+app.use("/api/events",everoutes);
+//workshop routes
+app.use("/api/workshops",workroutes);
+
 
 app.listen(5000, () => {
   console.log("connected");
