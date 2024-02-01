@@ -11,9 +11,11 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+//import routes
 const comroutes = require("./Routes/competitionroutes");
 const everoutes =require("./Routes/eventroutes");
-const workroutes =require("./Routes/workshoproutes")
+const workroutes =require("./Routes/workshoproutes");
+const registerroutes=require("./Routes/registerroutes")
 // app instance
 const app = express();
 //cors middleware
@@ -29,6 +31,8 @@ app.use("/api/routes", comroutes);
 app.use("/api/events",everoutes);
 //workshop routes
 app.use("/api/workshops",workroutes);
+//registre routes
+app.use("/api/register",registerroutes)
 
 
 app.listen(5000, () => {
