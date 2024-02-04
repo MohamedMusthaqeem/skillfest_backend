@@ -2,7 +2,8 @@ const mongoose=require("mongoose");
 const Register=require("../Models/register");
 
 const getRegister = async (req, res) => {
-    const register = await Register.find({}).sort({ createdAt: -1 });
+    const user_id=req.user._id;
+    const register = await Register.find({user_id}).sort({ createdAt: -1 });
     res.status(200).json(register);
   };
 
@@ -19,6 +20,7 @@ const getRegister = async (req, res) => {
         supportnumtwo,
     } = req.body;
     try {
+      const user_id=req.user._id;
       const register = await Register.create({
         name,
         year,
@@ -29,6 +31,7 @@ const getRegister = async (req, res) => {
         fees,
         supportnumone,
         supportnumtwo,
+        user_id
 
       });
       res.status(200).json(register);

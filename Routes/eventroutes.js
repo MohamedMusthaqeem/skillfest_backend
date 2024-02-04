@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const requireAuth=require('../middleware/requireAuth');
 const {
   getevents,
   getsingleevents,
@@ -7,6 +7,9 @@ const {
   deleteevents,
   updateevents,
 } = require("../controllers/eventcontroller");
+const router = express.Router();
+//auth middleware
+router.use(requireAuth);
 //get all events
 router.get("/", getevents);
 //get single event

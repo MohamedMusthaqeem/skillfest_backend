@@ -1,4 +1,5 @@
 const express = require("express");
+const requireAuth=require('../middleware/requireAuth');
 const {
   createnewcomp,
   getcomp,
@@ -6,7 +7,11 @@ const {
   deletecomp,
   updateComp,
 } = require("../controllers/compcontoller");
+
 const router = express.Router();
+//middlewareauth
+router.use(requireAuth);
+
 // get all competitions
 router.get("/", getcomp);
 //get single competitions

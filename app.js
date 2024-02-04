@@ -1,10 +1,11 @@
+require("dotenv").config()
 const express = require("express");
 //cors
 const cors=require("cors");
 // db connection setup
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://localhost:27017/skillfest")
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("connected db");
   })
@@ -15,7 +16,8 @@ mongoose
 const comroutes = require("./Routes/competitionroutes");
 const everoutes =require("./Routes/eventroutes");
 const workroutes =require("./Routes/workshoproutes");
-const registerroutes=require("./Routes/registerroutes")
+const registerroutes=require("./Routes/registerroutes");
+const userroutes=require("./Routes/userroutes")
 // app instance
 const app = express();
 //cors middleware
@@ -33,8 +35,10 @@ app.use("/api/events",everoutes);
 app.use("/api/workshops",workroutes);
 //registre routes
 app.use("/api/register",registerroutes)
+//user routes
+app.use("/api/user",userroutes)
 
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
   console.log("connected");
 });

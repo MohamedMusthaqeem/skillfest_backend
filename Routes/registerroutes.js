@@ -1,10 +1,12 @@
 const express = require("express");
-const router = express.Router();
+const requireAuth=require('../middleware/requireAuth');
 const {
   getRegister,
   setRegister,
 } = require("../controllers/registercontroller");
-
+const router = express.Router();
+//auth middleware
+router.use(requireAuth);
 //get resgistered data
 router.get("/", getRegister);
 //post a register
