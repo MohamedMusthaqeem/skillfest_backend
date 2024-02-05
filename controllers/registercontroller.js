@@ -1,5 +1,8 @@
 const mongoose=require("mongoose");
 const Register=require("../Models/register");
+const{
+SendmailTransport
+}=require("../middleware/email")
 
 const getRegister = async (req, res) => {
     const user_id=req.user._id;
@@ -18,6 +21,8 @@ const getRegister = async (req, res) => {
         fees,
         supportnumone,
         supportnumtwo,
+        date,
+        time,
     } = req.body;
     try {
       const user_id=req.user._id;
@@ -31,9 +36,14 @@ const getRegister = async (req, res) => {
         fees,
         supportnumone,
         supportnumtwo,
-        user_id
+        user_id,
+        date,
+        time,
 
       });
+      if(email){
+        SendmailTransport(email,name,event_name,supportnumone,supportnumtwo,date,time);
+      }
       res.status(200).json(register);
     } catch (err) {
       res.status(400).json(err);
