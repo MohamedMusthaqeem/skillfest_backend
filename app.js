@@ -18,6 +18,8 @@ const everoutes =require("./Routes/eventroutes");
 const workroutes =require("./Routes/workshoproutes");
 const registerroutes=require("./Routes/registerroutes");
 const userroutes=require("./Routes/userroutes")
+const user_mainroutes=require("./Routes/user_mainroutes");
+const adminroutes=require("./Routes/adminroutes");
 // app instance
 const app = express();
 //cors middleware
@@ -37,7 +39,10 @@ app.use("/api/workshops",workroutes);
 app.use("/api/register",registerroutes)
 //user routes
 app.use("/api/user",userroutes)
-
+//user_admin
+app.use("/api/user_main",user_mainroutes);
+//admin
+app.use("/api/admin",adminroutes);
 
 app.listen(process.env.PORT, () => {
   console.log("connected");
