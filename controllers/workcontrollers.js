@@ -1,8 +1,14 @@
 const { mongoose } = require("mongoose");
 const Workshop = require("../Models/workshop");
 
-//get all workshops
+//get specific workshops
 const getworkshop = async (req, res) => {
+  const user_id=req.user._id;
+  const workshop = await Workshop.find({user_id}).sort({ createdAt: -1 });
+  res.status(200).json(workshop);
+};
+//get all workshop
+const get_user_workshop = async (req, res) => {
   const workshop = await Workshop.find({}).sort({ createdAt: -1 });
   res.status(200).json(workshop);
 };
@@ -35,6 +41,7 @@ const setworkshop = async (req, res) => {
     supportnumtwo,
   } = req.body;
   try {
+    const user_id=req.user._id;
     const workshop = await Workshop.create({
       title,
       description,
@@ -48,6 +55,7 @@ const setworkshop = async (req, res) => {
       amount,
       supportnumone,
       supportnumtwo,
+      user_id
     });
     res.status(200).json(workshop);
   } catch (err) {
@@ -88,6 +96,7 @@ const updateworkshop = async (req, res) => {
 
 module.exports = {
   getworkshop,
+  get_user_workshop,
   getsingleworkshop,
   setworkshop,
   deleteworkshop,

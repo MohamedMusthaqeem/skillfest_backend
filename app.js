@@ -20,6 +20,7 @@ const registerroutes=require("./Routes/registerroutes");
 const userroutes=require("./Routes/userroutes")
 const user_mainroutes=require("./Routes/user_mainroutes");
 const adminroutes=require("./Routes/adminroutes");
+const user_get_routes=require("./Routes/user_get_data");
 // app instance
 const app = express();
 //cors middleware
@@ -43,6 +44,8 @@ app.use("/api/user",userroutes)
 app.use("/api/user_main",user_mainroutes);
 //admin
 app.use("/api/admin",adminroutes);
+//get all data for users
+app.use("/get_all",user_get_routes);
 
 app.listen(process.env.PORT, () => {
   console.log("connected");

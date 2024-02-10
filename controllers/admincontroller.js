@@ -6,12 +6,12 @@ const createToken=(_id)=>{
 }
 // login user func
 const loginUser=async (req,res)=>{
-   const {admin_email,admin_password}=req.body
+   const {email,password}=req.body
    try{
-    const user= await User.login(admin_email,admin_password);
-    const name=user.admin_name;
+    const user= await User.login(email,password);
+    const name=user.name;
     const token=createToken(user._id);
-    res.status(200).json({admin_email,name,token});
+    res.status(200).json({email,name,token});
  }
  catch(error){
    res.status(400).json({error:error.message})
@@ -19,12 +19,12 @@ const loginUser=async (req,res)=>{
 }
 
 const signupUser=async(req,res)=>{
-    const{ admin_name,admin_email,admin_password}=req.body;
+    const{ user_name,email,password}=req.body;
     try{
-       const user= await User.signup(admin_name,admin_email,admin_password);
+       const user= await User.signup(user_name,email,password);
 
        const token=createToken(user._id);
-       res.status(200).json({admin_email,token});
+       res.status(200).json({email,token});
     }
     catch(error){
       res.status(400).json({error:error.message})

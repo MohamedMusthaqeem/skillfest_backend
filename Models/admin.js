@@ -4,36 +4,36 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 
 const adminSchema = new Schema({
-  admin_name: {
+  user_name: {
     type: String,
     required: true,
   },
-  admin_email: {
+  email: {
     type: String,
     required: true,
     unique: true,
   },
-  admin_password: {
+  password: {
     type: String,
     required: true,
   },
 });
 
 // static signup method
-adminSchema.statics.signup = async function (admin_name, admin_email, admin_password) {
+adminSchema.statics.signup = async function (user_name, email, password) {
   //validate
 
-  const exists = await this.findOne({ admin_email });
+  const exists = await this.findOne({ email });
 
-  if (!admin_name || !admin_email || !admin_password) {
+  if (!user_name || !email || !password) {
     throw Error("All fields must be filled");
   }
 
-  if (!validator.isEmail(admin_email)) {
+  if (!validator.isEmail(email)) {
     throw Error("Invalid Email");
   }
 
-  if (!validator.isStrongPassword(admin_password)) {
+  if (!validator.isStrongPassword(password)) {
     throw Error("Provide a strong password");
   }
 
@@ -42,25 +42,25 @@ adminSchema.statics.signup = async function (admin_name, admin_email, admin_pass
   }
   const salt = await bcrypt.genSalt(12);
 
-  const hash = await bcrypt.hash(admin_password, salt);
+  const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ admin_name, admin_email, admin_password: hash });
+  const user = await this.create({ user_name, email, password: hash });
 
   return user;
 };
 //login
 
-adminSchema.statics.login = async function (admin_email, admin_password) {
-  if (!admin_email|| !admin_password) {
+adminSchema.statics.login = async function (email, password) {
+  if (!email|| !password) {
     throw Error("All fields must be filled");
   }
-  const user = await this.findOne({ admin_email });
+  const user = await this.findOne({ email });
 
   if (!user) {
     throw Error("Invalid Email");
   }
 
-  const match = await bcrypt.compare(admin_password, user.admin_password);
+  const match = await bcrypt.compare(password, user.password);
 
   if (!match) {
     throw Error("Incorrect Password");

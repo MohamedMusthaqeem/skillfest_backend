@@ -50,6 +50,10 @@ const Workshop = new Schem({
     type:Number,
     required:true,
   },
+  user_id:{
+    type:String,
+    required:true
+  }
 },
 {timestamps:true});
 module.exports=mongoose.model("Workshop",Workshop);

@@ -1,9 +1,14 @@
-const {  mongoose } = require("mongoose");
+const  mongoose  = require("mongoose");
 const Events = require("../Models/events");
-const router = require("../Routes/competitionroutes");
 
-//get all evnets
+//get specific events
 const getevents = async (req, res) => {
+  const user_id=req.user._id;
+  const events = await Events.find({user_id}).sort({ createdAt: -1 });
+  res.status(200).json(events);
+};
+//get all events
+const get_user_events= async (req, res) => {
   const events = await Events.find({}).sort({ createdAt: -1 });
   res.status(200).json(events);
 };
@@ -35,6 +40,7 @@ const setevents = async (req, res) => {
     supportnumtwo,
   } = req.body;
   try {
+    const user_id=req.user._id;
     const events = await Events.create({
       title,
       description,
@@ -47,6 +53,7 @@ const setevents = async (req, res) => {
       third_prize,
       supportnumone,
       supportnumtwo,
+      user_id
     });
     res.status(200).json(events);
   } catch (err) {
@@ -87,6 +94,7 @@ const updateevents = async (req, res) => {
 
 module.exports = {
   getevents,
+  get_user_events,
   getsingleevents,
   setevents,
   deleteevents,

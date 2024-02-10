@@ -1,11 +1,16 @@
-const Competition = require("../Models/competitions");
 const mongoose = require("mongoose");
-//get all
+const Competition = require("../Models/competitions");
+//get specific competitions
 const getcomp = async (req, res) => {
+  const user_id=req.user._id;
+  const competitions = await Competition.find({user_id}).sort({ createdAt: -1 });
+  res.status(200).json(competitions);
+};
+//get all competions
+const get_user_comp = async (req, res) => {
   const competitions = await Competition.find({}).sort({ createdAt: -1 });
   res.status(200).json(competitions);
 };
-
 //get single
 const getsinglecomp = async (req, res) => {
   const { id } = req.params;
@@ -35,6 +40,7 @@ const createnewcomp = async (req, res) => {
     supportnumtwo,
   } = req.body;
   try {
+    const user_id=req.user._id;
     const newcom = await Competition.create({
       title,
       description,
@@ -47,6 +53,7 @@ const createnewcomp = async (req, res) => {
       third_prize,
       supportnumone,
       supportnumtwo,
+      user_id,
     });
     res.status(200).json(newcom);
   } catch (err) {
@@ -95,4 +102,5 @@ module.exports = {
   createnewcomp,
   deletecomp,
   updateComp,
+  get_user_comp,
 };
