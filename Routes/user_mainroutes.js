@@ -1,4 +1,5 @@
 const express=require("express");
+const requireAuth =require("../middleware/requireAuth");
 const router=express.Router();
 
 const{
@@ -6,11 +7,11 @@ const{
   loginUser,
   getUser,deleteUser,
 }=require("../controllers/user_maincontroller");
-const { compareSync } = require("bcrypt");
+
 
 //login user 
 router.post('/login',loginUser)
-
+router.use(requireAuth);
 //signup user
 router.post('/signup',signupUser);
 
