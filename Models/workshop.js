@@ -22,6 +22,10 @@ const Workshop = new Schem({
     type: String,
     required: true,
   },
+  end_date: {
+    type: String,
+    required: true,
+  },
   no_of_hours: {
     type: Number,
     required: true,
@@ -48,6 +52,10 @@ const Workshop = new Schem({
   },
   supportnumtwo:{
     type:Number,
+    required:true,
+  },
+  venue:{
+    type:String,
     required:true,
   },
   user_id:{

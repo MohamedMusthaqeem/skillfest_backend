@@ -27,6 +27,7 @@ const get_all_Register = async (req, res) => {
         supportnumtwo,
         date,
         time,
+        upload,
     } = req.body;
     try {
       const user_id=req.user._id;
@@ -43,7 +44,7 @@ const get_all_Register = async (req, res) => {
         user_id,
         date,
         time,
-
+        upload,
       });
       if(email){
         SendmailTransport(email,name,event_name,supportnumone,supportnumtwo,date,time);

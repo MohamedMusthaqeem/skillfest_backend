@@ -46,6 +46,9 @@ const registerSchema=new Schema({
         type:String,
         required:true
     },
+    upload:{
+        type:String,
+    },
     user_id:{
         type:String,
         required:true

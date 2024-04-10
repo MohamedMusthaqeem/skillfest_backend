@@ -38,6 +38,7 @@ const setevents = async (req, res) => {
     third_prize,
     supportnumone,
     supportnumtwo,
+    venue,
   } = req.body;
   try {
     const user_id=req.user._id;
@@ -53,6 +54,7 @@ const setevents = async (req, res) => {
       third_prize,
       supportnumone,
       supportnumtwo,
+      venue,
       user_id
     });
     res.status(200).json(events);

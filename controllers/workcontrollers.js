@@ -32,6 +32,7 @@ const setworkshop = async (req, res) => {
     imageurl,
     time,
     date,
+    end_date,
     no_of_hours,
     no_of_days,
     outcomes,
@@ -39,6 +40,7 @@ const setworkshop = async (req, res) => {
     amount,
     supportnumone,
     supportnumtwo,
+    venue,
   } = req.body;
   try {
     const user_id=req.user._id;
@@ -48,6 +50,7 @@ const setworkshop = async (req, res) => {
       imageurl,
       time,
       date,
+      end_date,
       no_of_hours,
       no_of_days,
       outcomes,
@@ -55,6 +58,7 @@ const setworkshop = async (req, res) => {
       amount,
       supportnumone,
       supportnumtwo,
+      venue,
       user_id
     });
     res.status(200).json(workshop);
