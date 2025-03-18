@@ -47,15 +47,15 @@ const eventSchema = new Schema(
       type: Number,
       required: true,
     },
-    venue:{
-      type:String,
-      required:true,
+    venue: {
+      type: String,
+      required: true,
     },
-    user_id:{
-      type:String,
-      required:true
-    }
+    user_id: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
-module.exports=mongoose.model("Events",eventSchema);
+module.exports = mongoose.model("Events", eventSchema);

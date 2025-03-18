@@ -51,7 +51,7 @@ adminSchema.statics.signup = async function (user_name, email, password) {
 //login
 
 adminSchema.statics.login = async function (email, password) {
-  if (!email|| !password) {
+  if (!email || !password) {
     throw Error("All fields must be filled");
   }
   const user = await this.findOne({ email });
@@ -68,4 +68,4 @@ adminSchema.statics.login = async function (email, password) {
 
   return user;
 };
-module.exports = mongoose.model("Admin", adminSchema)
+module.exports = mongoose.model("Admin", adminSchema);

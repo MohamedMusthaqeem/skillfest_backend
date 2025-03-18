@@ -1,14 +1,14 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const Events = require("../Models/events");
-
+const Feeddback = require("../Models/feedbackSchema");
 //get specific events
 const getevents = async (req, res) => {
-  const user_id=req.user._id;
-  const events = await Events.find({user_id}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+  const events = await Events.find({ user_id }).sort({ createdAt: -1 });
   res.status(200).json(events);
 };
 //get all events
-const get_user_events= async (req, res) => {
+const get_user_events = async (req, res) => {
   const events = await Events.find({}).sort({ createdAt: -1 });
   res.status(200).json(events);
 };
@@ -23,6 +23,15 @@ const getsingleevents = async (req, res) => {
     return res.status(400).json({ err: "no events found" });
   }
   res.status(200).json(events);
+};
+
+//get feedback
+const getFeedback = async (req, res) => {
+  const user_main_id = req.user._id;
+  const feedback = await Feeddback.find({ user_main_id }).sort({
+    createdAt: -1,
+  });
+  res.status(200).json(feedback);
 };
 //post a events
 const setevents = async (req, res) => {
@@ -41,7 +50,7 @@ const setevents = async (req, res) => {
     venue,
   } = req.body;
   try {
-    const user_id=req.user._id;
+    const user_id = req.user._id;
     const events = await Events.create({
       title,
       description,
@@ -55,7 +64,7 @@ const setevents = async (req, res) => {
       supportnumone,
       supportnumtwo,
       venue,
-      user_id
+      user_id,
     });
     res.status(200).json(events);
   } catch (err) {
@@ -101,4 +110,5 @@ module.exports = {
   setevents,
   deleteevents,
   updateevents,
+  getFeedback,
 };
