@@ -22,6 +22,7 @@ const user_mainroutes = require("./Routes/user_mainroutes");
 const adminroutes = require("./Routes/adminroutes");
 const scraperoutes = require("./Routes/scarperoutes");
 const user_get_routes = require("./Routes/user_get_data");
+const dashboardroutes = require("./Routes/dashboardroutes");
 // app instance
 const app = express();
 //cors middleware
@@ -50,6 +51,7 @@ app.use("/get_all", user_get_routes);
 
 app.use("/api/scrape", scraperoutes);
 
+app.use("/api/dashboard", dashboardroutes);
 app.listen(process.env.PORT, () => {
   console.log("connected");
 });
